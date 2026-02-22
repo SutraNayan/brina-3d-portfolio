@@ -1,0 +1,470 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   THEME VARIABLES - DARK (Default)
+   ======================================== */
+:root {
+  /* Keller Williams Palette */
+  --color-cyan: #b40101;
+  /* KW Red */
+  --color-magenta: #cf142b;
+  /* KW Lighter Red */
+  --color-gold: #f1f1f1;
+  /* KW Silver/White */
+  --color-purple: #111111;
+  /* KW Dark Charcoal */
+  --color-void: #000000;
+  --color-luminescence: #ffffff;
+
+  /* Dark Theme */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-tertiary: #1a1a1a;
+  --bg-glass: rgba(255, 255, 255, 0.02);
+  --bg-glass-hover: rgba(255, 255, 255, 0.05);
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-tertiary: rgba(255, 255, 255, 0.5);
+  --text-muted: rgba(255, 255, 255, 0.3);
+
+  --border-color: rgba(180, 1, 1, 0.2);
+  /* Red tinted border */
+  --border-hover: rgba(180, 1, 1, 0.4);
+
+  --shadow-glow: 0 0 30px rgba(180, 1, 1, 0.2);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.8);
+
+  --gradient-primary: linear-gradient(135deg, #b40101, #cf142b);
+  --gradient-secondary: linear-gradient(135deg, #cf142b, #f1f1f1);
+  --gradient-tertiary: linear-gradient(135deg, #111111, #b40101);
+
+  --font-primary: 'Space Grotesk', sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Poppins', sans-serif;
+}
+
+/* ========================================
+   LIGHT THEME
+   ======================================== */
+[data-theme="light"] {
+  --bg-primary: #f8f9fc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f0f2f5;
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --bg-glass-hover: rgba(255, 255, 255, 0.9);
+
+  --text-primary: #0a0a0f;
+  --text-secondary: rgba(10, 10, 15, 0.7);
+  --text-tertiary: rgba(10, 10, 15, 0.5);
+  --text-muted: rgba(10, 10, 15, 0.3);
+
+  --border-color: rgba(10, 10, 15, 0.1);
+  --border-hover: rgba(10, 10, 15, 0.2);
+
+  --shadow-glow: 0 0 30px rgba(131, 56, 236, 0.3);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+  * {
+    @apply border-[var(--border-color)];
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.5s ease, color 0.5s ease;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+
+  p,
+  span,
+  a,
+  li {
+    font-family: var(--font-body);
+  }
+}
+
+@layer utilities {
+
+  /* ========================================
+     TEXT GRADIENTS
+     ======================================== */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-secondary);
+  }
+
+  .text-gradient-magenta {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-tertiary);
+  }
+
+  /* ========================================
+     GLASS MORPHISM
+     ======================================== */
+  .glass {
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+  }
+
+  .glass-hover:hover {
+    background: var(--bg-glass-hover);
+    border-color: var(--border-hover);
+  }
+
+  /* ========================================
+     HOLOGRAPHIC EFFECTS
+     ======================================== */
+  .holographic {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .holographic::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.1) 45%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0.1) 55%,
+        transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+  }
+
+  .holographic:hover::before {
+    transform: translateX(100%);
+  }
+
+  /* ========================================
+     GLOW EFFECTS
+     ======================================== */
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4),
+      /* Gold */
+      0 0 40px rgba(212, 175, 55, 0.2),
+      0 0 60px rgba(212, 175, 55, 0.1);
+  }
+
+  .glow-magenta {
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.4),
+      /* Champagne */
+      0 0 40px rgba(197, 160, 89, 0.2),
+      0 0 60px rgba(197, 160, 89, 0.1);
+  }
+
+  .glow-purple {
+    box-shadow: 0 0 20px rgba(139, 115, 85, 0.4),
+      /* Bronze */
+      0 0 40px rgba(139, 115, 85, 0.2),
+      0 0 60px rgba(139, 115, 85, 0.1);
+  }
+
+  /* ========================================
+     3D TRANSFORMS
+     ======================================== */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  /* ========================================
+     ANIMATION EASINGS
+     ======================================== */
+  .ease-expo {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .ease-bounce {
+    transition-timing-function: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  }
+
+  /* ========================================
+     TEXT STROKE
+     ======================================== */
+  .text-stroke {
+    -webkit-text-stroke: 1px var(--border-color);
+    color: transparent;
+  }
+
+  /* ========================================
+     SCAN LINE EFFECT
+     ======================================== */
+  .scan-lines {
+    position: relative;
+  }
+
+  .scan-lines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ========================================
+     NOISE TEXTURE
+     ======================================== */
+  .noise {
+    position: relative;
+  }
+
+  .noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ========================================
+     ORGANIC HAND-DRAWN SHAPES
+     ======================================== */
+  .organic-border {
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    border: 2px solid var(--border-color);
+  }
+
+  .organic-border-alt {
+    border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
+    border: 2px solid var(--border-color);
+  }
+
+  .organic-bg {
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  }
+
+  /* ========================================
+     RGB SPLIT EFFECT
+     ======================================== */
+  .rgb-split {
+    position: relative;
+  }
+
+  .rgb-split:hover {
+    animation: rgb-split 0.3s ease;
+  }
+
+  @keyframes rgb-split {
+
+    0%,
+    100% {
+      text-shadow: none;
+    }
+
+    25% {
+      text-shadow: -2px 0 #b40101, 2px 0 #f1f1f1;
+      /* KW Red & Silver Split */
+    }
+
+    50% {
+      text-shadow: 2px 0 #b40101, -2px 0 #f1f1f1;
+    }
+
+    75% {
+      text-shadow: -1px 0 #b40101, 1px 0 #f1f1f1;
+    }
+  }
+
+  /* ========================================
+     FLOATING ANIMATION
+     ======================================== */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* ========================================
+     PULSE GLOW
+     ======================================== */
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+
+    0%,
+    100% {
+      box-shadow: 0 0 20px rgba(180, 1, 1, 0.3);
+      /* KW Red */
+    }
+
+    50% {
+      box-shadow: 0 0 40px rgba(180, 1, 1, 0.6);
+    }
+  }
+
+  /* ========================================
+     SHIMMER EFFECT
+     ======================================== */
+  .animate-shimmer {
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* ========================================
+     ORBIT ANIMATION
+     ======================================== */
+  .animate-orbit {
+    animation: orbit 20s linear infinite;
+  }
+
+  @keyframes orbit {
+    from {
+      transform: rotate(0deg) translateX(100px) rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg) translateX(100px) rotate(-360deg);
+    }
+  }
+
+  /* ========================================
+     LINE CLAMP
+     ======================================== */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* ========================================
+   CUSTOM SCROLLBAR
+   ======================================== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+/* ========================================
+   SELECTION
+   ======================================== */
+::selection {
+  background: rgba(180, 1, 1, 0.4);
+  /* KW Red */
+  color: var(--text-primary);
+}
+
+/* ========================================
+   LENIS SMOOTH SCROLL
+   ======================================== */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
